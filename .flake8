@@ -1,0 +1,10 @@
+[flake8]
+count=True
+statistics=True
+show-source=True
+
+application-import-names=utils
+
+max-line-length=120
+import-order-style=smarkets
+docstring-convention=pep257
