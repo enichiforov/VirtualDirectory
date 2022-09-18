@@ -17,6 +17,5 @@ class CommandHandler:
         }
 
     def handle(self, command: Command) -> None:
-        print(command.operation, end=" ")
         operation = self._operations[command.operation]
         operation.execute(command.value)

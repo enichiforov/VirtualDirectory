@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, List, Tuple
 
+from utils.constants import Operations
 from utils.directory import Directory
 from utils.protocols import DirectoryProtocol
 
@@ -34,7 +35,7 @@ class AbstractOperation(ABC):
 
 class CreateOperation(AbstractOperation):
     def execute(self, value: List[str]) -> None:
-        print(value[0])
+        print(f"{ Operations.CREATE.value} {value[0]}")
         directories_names = self._get_directories_names(value[0])
 
         current_directory = None
@@ -52,7 +53,7 @@ class CreateOperation(AbstractOperation):
 
 class MoveOperation(AbstractOperation):
     def execute(self, value: List[str]) -> None:
-        print(value[0])
+        print(f"{ Operations.MOVE.value} {value[0]}")
         directories_names, target_directory_name = value[0].split(" ")
         directories_names = directories_names.split("/")
 
@@ -70,7 +71,7 @@ class MoveOperation(AbstractOperation):
 
 class DeleteOperation(AbstractOperation):
     def execute(self, value: List[str]) -> None:
-        print(value[0])
+        print(f"{ Operations.DELETE.value} {value[0]}")
         directories_names = self._get_directories_names(value[0])
         if directories_names[0] not in self._directories:
             print(f"Cannot delete {value[0]} - {directories_names[0]} does not exist")
@@ -82,6 +83,6 @@ class DeleteOperation(AbstractOperation):
 
 class ListOperation(AbstractOperation):
     def execute(self, value: List[str]) -> None:
-        print("")
+        print(Operations.LIST.value)
         for directory in self._directories.values():
             directory.view()
